@@ -36,6 +36,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./components/ui/dialog";
+import { Value } from "node_modules/@radix-ui/react-select/dist";
 
 const Form = () => {
   const newForm = useForm({
@@ -236,6 +237,10 @@ const Form = () => {
                   <Button
                     type="submit"
                     className="bg-green-700 hover:bg-green-600"
+                    onClick={() => {
+                      const values = newForm.getValues();
+                      console.log(values);
+                    }}
                   >
                     Submit
                   </Button>
