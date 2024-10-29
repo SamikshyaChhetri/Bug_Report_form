@@ -63,6 +63,10 @@ const Form = () => {
                 </SelectContent>
               </Select>
             </div>
+            <div className="grid w-full  items-center gap-1.5">
+              <label htmlFor="msg">Message</label>
+              <Textarea placeholder="Type your message here." />
+            </div>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
