@@ -1,14 +1,14 @@
 import "./App.css";
-import Component from "./Component";
+import Form from "./Form";
+// import Component from "./Component";
 
 function App() {
   return (
     <div>
-      <Component></Component>
+      {/* <Component></Component> */}
+      <Form></Form>
     </div>
   );
-}  
- 
-export default App;
+}
 
- 
+export default App;
