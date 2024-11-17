@@ -1,3 +1,4 @@
+import { toast, Toaster } from "sonner";
 import { Button } from "./components/ui/button";
 import {
   Card,
@@ -70,8 +71,23 @@ const Form = () => {
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
-          <Button>Deploy</Button>
+          <Button
+            className="bg-red-600 hover:bg-red-500"
+            onClick={() => {
+              toast.error("Couldn't submit the form");
+            }}
+          >
+            Cancel
+          </Button>
+          <Toaster richColors />
+          <Button
+            className="bg-green-700 hover:bg-green-600"
+            onClick={() => {
+              toast.success("Form submitted successfully"); // Optional duration in ms
+            }}
+          >
+            Deploy
+          </Button>
         </CardFooter>
       </Card>
     </div>
