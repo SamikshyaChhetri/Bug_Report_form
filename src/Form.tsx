@@ -8,6 +8,16 @@ import {
   CardTitle,
 } from "./components/ui/card";
 import { Input } from "./components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select";
+import { Textarea } from "./components/ui/textarea";
 
 const Form = () => {
   return (
@@ -37,7 +47,22 @@ const Form = () => {
             <div>
               <label htmlFor="apps">Select your favourite app</label>
 
-         
+              <Select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Select application" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Select the most used application</SelectLabel>
+                    <SelectItem value="facebook">Facebook</SelectItem>
+                    <SelectItem value="insta">Instagram</SelectItem>
+                    <SelectItem value="yt">Youtube</SelectItem>
+                    <SelectItem value="sc">Snapchat</SelectItem>
+                    <SelectItem value="tiktok">Tiktok</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
