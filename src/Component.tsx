@@ -1,5 +1,6 @@
 import { toast, Toaster } from "sonner";
 import { Button } from "./components/ui/button";
+import { Dialog, DialogContent, DialogTrigger } from "./components/ui/dialog";
 
 const Component = () => {
   return (
@@ -12,6 +13,11 @@ const Component = () => {
       >
         shadcn Button
       </Button>
+
+      <Dialog>
+        <DialogTrigger>Open</DialogTrigger>
+        <DialogContent>This is the content</DialogContent>
+      </Dialog>
 
       <Button>Edit</Button>
     </div>
