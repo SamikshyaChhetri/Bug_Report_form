@@ -20,6 +20,13 @@ import {
 } from "./components/ui/select";
 import { Textarea } from "./components/ui/textarea";
 import { useForm } from "react-hook-form";
+import { Icon } from "@iconify/react/dist/iconify.js";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./components/ui/tooltip";
 
 const Form = () => {
   const newForm = useForm({
@@ -43,7 +50,10 @@ const Form = () => {
         <CardContent>
           <div className="flex flex-col gap-5">
             <div className="grid w-full  items-center gap-1.5">
-              <label htmlFor="text">Username</label>
+              <label htmlFor="text" className="flex gap-1 items-center">
+                Username
+                <Icon icon="line-md:person-filled" />
+              </label>
               <Input
                 type="text"
                 id="text"
@@ -51,9 +61,11 @@ const Form = () => {
                 {...newForm.register("username")}
               />
             </div>
-
             <div className="grid w-full items-center gap-1.5">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email" className="flex gap-1 items-center">
+                Email
+                <Icon icon="line-md:email-twotone" />
+              </label>
               <Input
                 type="email"
                 id="email"
@@ -62,7 +74,10 @@ const Form = () => {
               />
             </div>
             <div className="grid w-full  items-center gap-1.5">
-              <label htmlFor="number">Contact</label>
+              <label htmlFor="number" className="flex gap-1 items-center">
+                Contact
+                <Icon icon="line-md:phone-call-loop" />
+              </label>
               <Input
                 type="number"
                 placeholder="Contact"
@@ -70,7 +85,10 @@ const Form = () => {
               />
             </div>
             <div>
-              <label htmlFor="apps">Select your favourite app</label>
+              <label htmlFor="apps" className="flex gap-1 items-center">
+                Select your favourite app
+                <Icon icon="icon-park-twotone:all-application" />
+              </label>
 
               <Select
                 onValueChange={(v) => {
@@ -84,17 +102,46 @@ const Form = () => {
                 <SelectContent>
                   <SelectGroup>
                     <SelectLabel>Select the most used application</SelectLabel>
-                    <SelectItem value="facebook">Facebook</SelectItem>
-                    <SelectItem value="insta">Instagram</SelectItem>
-                    <SelectItem value="yt">Youtube</SelectItem>
-                    <SelectItem value="sc">Snapchat</SelectItem>
-                    <SelectItem value="tiktok">Tiktok</SelectItem>
+                    <SelectItem value="facebook">
+                      <div className="flex gap-1 items-center">
+                        <span>Facebook</span>
+                        <Icon icon="line-md:facebook" />
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="insta">
+                      <div className="flex gap-1 items-center">
+                        <span>Instagram</span>
+                        <Icon icon="line-md:instagram" />
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="yt">
+                      <div className="flex gap-1 items-center">
+                        <span>Youtube</span> <Icon icon="line-md:youtube" />{" "}
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="twitter">
+                      <div className="flex gap-1 items-center">
+                        <span>Twitter</span>
+                        <Icon icon="line-md:twitter" />{" "}
+                      </div>
+                    </SelectItem>
+                    <SelectItem value="tiktok">
+                      <div className="flex gap-1 items-center">
+                        <span>Tiktok</span>
+                        <Icon icon="line-md:tiktok" />{" "}
+                      </div>
+                    </SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
             </div>
             <div className="grid w-full  items-center gap-1.5">
-              <label htmlFor="msg">Message</label>
+              <label htmlFor="msg">
+                <div className="flex gap-1 items-center">
+                  <span>Message</span>
+                  <Icon icon="line-md:chat-twotone" />
+                </div>
+              </label>
               <Textarea
                 placeholder="Type your message here."
                 {...newForm.register("message")}
@@ -103,28 +150,49 @@ const Form = () => {
           </div>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button
-            className="bg-red-600 hover:bg-red-500"
-            onClick={() => {
-              toast.error("Couldn't submit the form");
-            }}
-          >
-            Cancel
-          </Button>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  className="bg-red-600 hover:bg-red-500"
+                  onClick={() => {
+                    toast.error("Couldn't submit the form");
+                  }}
+                >
+                  Cancel
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Cancel the form</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
           <Toaster richColors />
-          <Button
-            className="bg-green-700 hover:bg-green-600"
-            onClick={() => {
-              toast.success("Form submitted successfully");
-              const values = newForm.getValues();
-              console.log(values);
-            }}
-          >
-            Deploy
-          </Button>
+
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  className="bg-green-700 hover:bg-green-600"
+                  onClick={() => {
+                    toast.success("Form submitted successfully");
+                    const values = newForm.getValues();
+                    console.log(values);
+                  }}
+                >
+                  Submit
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Submit the form</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </CardFooter>
       </Card>
     </div>
   );
 };
 export default Form;
+//malai ta kattiiii thik lagdaina ma deploy garxu
