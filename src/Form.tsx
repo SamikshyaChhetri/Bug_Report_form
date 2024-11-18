@@ -72,7 +72,11 @@ const Form = () => {
             <div>
               <label htmlFor="apps">Select your favourite app</label>
 
-              <Select>
+              <Select
+                onValueChange={(value) => {
+                  console.log(value);
+                }}
+              >
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Select application" />
                 </SelectTrigger>
