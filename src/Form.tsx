@@ -73,8 +73,9 @@ const Form = () => {
               <label htmlFor="apps">Select your favourite app</label>
 
               <Select
-                onValueChange={(value) => {
-                  console.log(value);
+                onValueChange={(v) => {
+                  console.log(v);
+                  newForm.setValue("application", v);
                 }}
               >
                 <SelectTrigger className="w-full">
