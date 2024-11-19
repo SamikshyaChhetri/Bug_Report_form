@@ -36,7 +36,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "./components/ui/dialog";
-import { Value } from "node_modules/@radix-ui/react-select/dist";
+// import { Value } from "node_modules/@radix-ui/react-select/dist";
 
 const Form = () => {
   const newForm = useForm({
@@ -59,7 +59,7 @@ const Form = () => {
         </CardHeader>
         <CardContent>
           <div className="flex flex-col gap-5">
-            <div className="grid w-full  items-center gap-1.5">
+            <div className="flex flex-col w-full   items-left gap-1.5">
               <label htmlFor="text" className="flex gap-1 items-center">
                 Username
                 <Icon icon="line-md:person-filled" />
@@ -71,7 +71,7 @@ const Form = () => {
                 {...newForm.register("username")}
               />
             </div>
-            <div className="grid w-full items-center gap-1.5">
+            <div className="flex flex-col w-full items-left gap-1.5">
               <label htmlFor="email" className="flex gap-1 items-center">
                 Email
                 <Icon icon="line-md:email-twotone" />
@@ -83,7 +83,7 @@ const Form = () => {
                 {...newForm.register("email")}
               />
             </div>
-            <div className="grid w-full  items-center gap-1.5">
+            <div className="flex flex-col w-full  items-left gap-1.5">
               <label htmlFor="number" className="flex gap-1 items-center">
                 Contact
                 <Icon icon="line-md:phone-call-loop" />
@@ -94,7 +94,7 @@ const Form = () => {
                 {...newForm.register("contact")}
               />
             </div>
-            <div>
+            <div className="flex flex-col w-full items-left gap-1.5">
               <label htmlFor="apps" className="flex gap-1 items-center">
                 Select your favourite app
                 <Icon icon="icon-park-twotone:all-application" />
@@ -126,28 +126,28 @@ const Form = () => {
                     </SelectItem>
                     <SelectItem value="yt">
                       <div className="flex gap-1 items-center">
-                        <span>Youtube</span> <Icon icon="line-md:youtube" />{" "}
+                        <span>Youtube</span> <Icon icon="line-md:youtube" />
                       </div>
                     </SelectItem>
                     <SelectItem value="twitter">
                       <div className="flex gap-1 items-center">
                         <span>Twitter</span>
-                        <Icon icon="line-md:twitter" />{" "}
+                        <Icon icon="line-md:twitter" />
                       </div>
                     </SelectItem>
                     <SelectItem value="tiktok">
                       <div className="flex gap-1 items-center">
                         <span>Tiktok</span>
-                        <Icon icon="line-md:tiktok" />{" "}
+                        <Icon icon="line-md:tiktok" />
                       </div>
                     </SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>
             </div>
-            <div className="flex w-full  items-center gap-1.5">
+            <div className="flex flex-col w-full  items-left gap-1.5">
               <label htmlFor="msg">
-                <div className="flex gap-1 items-center">
+                <div className="flex flex-row items-center">
                   <span>Message</span>
                   <Icon icon="line-md:chat-twotone" />
                 </div>
@@ -161,21 +161,6 @@ const Form = () => {
         </CardContent>
         <CardFooter className="flex justify-between">
           <TooltipProvider>
-            {/* <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  className="bg-red-600 hover:bg-red-500"
-                  onClick={() => {
-                    toast.error("Couldn't submit the form");
-                  }}
-                >
-                  Cancel
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Cancel the form</p>
-              </TooltipContent>
-            </Tooltip> */}
             <Toaster richColors />
 
             <Dialog>
