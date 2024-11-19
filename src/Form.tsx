@@ -27,6 +27,15 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "./components/ui/tooltip";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./components/ui/dialog";
 
 const Form = () => {
   const newForm = useForm({
@@ -151,7 +160,7 @@ const Form = () => {
         </CardContent>
         <CardFooter className="flex justify-between">
           <TooltipProvider>
-            <Tooltip>
+            {/* <Tooltip>
               <TooltipTrigger asChild>
                 <Button
                   className="bg-red-600 hover:bg-red-500"
@@ -165,29 +174,82 @@ const Form = () => {
               <TooltipContent>
                 <p>Cancel the form</p>
               </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+            </Tooltip> */}
+            <Toaster richColors />
 
-          <Toaster richColors />
-
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button
-                  className="bg-green-700 hover:bg-green-600"
-                  onClick={() => {
-                    toast.success("Form submitted successfully");
-                    const values = newForm.getValues();
-                    console.log(values);
-                  }}
-                >
-                  Submit
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Submit the form</p>
-              </TooltipContent>
-            </Tooltip>
+            <Dialog>
+              <DialogTrigger>
+                <Button variant="outline">Submit</Button>
+              </DialogTrigger>
+              <DialogContent className="w-">
+                <DialogHeader>
+                  <DialogTitle>Submit report</DialogTitle>
+                  <DialogDescription>
+                    Are you sure you want to submit the report?
+                  </DialogDescription>
+                </DialogHeader>
+                <div className=" flex flex-col gap-4 py-4">
+                  <div className=" items-center gap-4">
+                    <label
+                      htmlFor="Username"
+                      className="text-right flex flex-row gap-2"
+                    >
+                      Username: <div>{newForm.watch("username")}</div>
+                    </label>
+                  </div>
+                  <div className=" items-center gap-4">
+                    <label
+                      htmlFor="email"
+                      className="text-right flex flex-row gap-2"
+                    >
+                      Email: <div>{newForm.watch("email")}</div>
+                    </label>
+                  </div>
+                  <div className="items-center gap-4">
+                    <label
+                      htmlFor="number"
+                      className="text-right flex flex-row gap-2"
+                    >
+                      Contact:
+                      <div>{newForm.watch("contact")}</div>
+                    </label>
+                  </div>
+                  <div className=" items-center gap-4">
+                    <label
+                      htmlFor="apps"
+                      className="text-right flex flex-row gap-2 "
+                    >
+                      Favourite application:
+                      <div>{newForm.watch("application")}</div>
+                    </label>
+                  </div>
+                  <div className=" items-center gap-4">
+                    <label
+                      htmlFor="message"
+                      className="text-right flex flex-row gap-2"
+                    >
+                      Message: <div>{newForm.watch("message")}</div>
+                    </label>
+                  </div>
+                </div>
+                <DialogFooter className="flex">
+                  <Button
+                    type="submit"
+                    className="bg-green-700 hover:bg-green-600"
+                  >
+                    Submit
+                  </Button>
+                  <Button
+                    className="bg-red-600 hover:bg-red-500"
+                    onClick={() => {
+                      toast.error("Couldn't submit the form");
+                    }}
+                  >
+                    Cancel
+                  </Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
           </TooltipProvider>
         </CardFooter>
       </Card>
@@ -195,4 +257,3 @@ const Form = () => {
   );
 };
 export default Form;
-//malai ta kattiiii thik lagdaina ma deploy garxu
