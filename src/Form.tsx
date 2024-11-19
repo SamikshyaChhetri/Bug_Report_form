@@ -145,7 +145,7 @@ const Form = () => {
                 </SelectContent>
               </Select>
             </div>
-            <div className="grid w-full  items-center gap-1.5">
+            <div className="flex w-full  items-center gap-1.5">
               <label htmlFor="msg">
                 <div className="flex gap-1 items-center">
                   <span>Message</span>
@@ -233,7 +233,7 @@ const Form = () => {
                     </label>
                   </div>
                 </div>
-                <DialogFooter className="flex">
+                <DialogFooter className="flex gap-72">
                   <Button
                     type="submit"
                     className="bg-green-700 hover:bg-green-600"
