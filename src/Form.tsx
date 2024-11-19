@@ -180,9 +180,14 @@ const Form = () => {
 
             <Dialog>
               <DialogTrigger>
-                <Button variant="outline">Submit</Button>
+                <Tooltip>
+                  <TooltipTrigger>
+                    <Button variant="outline">Submit</Button>
+                  </TooltipTrigger>
+                  <TooltipContent>Submit the form</TooltipContent>
+                </Tooltip>
               </DialogTrigger>
-              <DialogContent className="w-">
+              <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Submit report</DialogTitle>
                   <DialogDescription>
@@ -234,24 +239,36 @@ const Form = () => {
                   </div>
                 </div>
                 <DialogFooter className="flex gap-72">
-                  <Button
-                    type="submit"
-                    className="bg-green-700 hover:bg-green-600"
-                    onClick={() => {
-                      const values = newForm.getValues();
-                      console.log(values);
-                    }}
-                  >
-                    Submit
-                  </Button>
-                  <Button
-                    className="bg-red-600 hover:bg-red-500"
-                    onClick={() => {
-                      toast.error("Couldn't submit the form");
-                    }}
-                  >
-                    Cancel
-                  </Button>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Button
+                        className="bg-red-600 hover:bg-red-500"
+                        onClick={() => {
+                          toast.error("Couldn't submit the form");
+                        }}
+                      >
+                        Cancel
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Cancel the form</TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <Button
+                        type="submit"
+                        className="bg-green-700 hover:bg-green-600"
+                        onClick={() => {
+                          toast.success("Successfully submitted the form");
+                          const values = newForm.getValues();
+                          console.log(values);
+                        }}
+                      >
+                        Submit
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>Submit the form</TooltipContent>
+                  </Tooltip>
                 </DialogFooter>
               </DialogContent>
             </Dialog>
