@@ -1,4 +1,4 @@
-import { toast, Toaster } from "sonner";
+import { toast } from "sonner";
 import { Button } from "./components/ui/button";
 import {
   Card,
@@ -24,7 +24,6 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "./components/ui/tooltip";
 import {
@@ -35,6 +34,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
 } from "./components/ui/dialog";
 // import { Value } from "node_modules/@radix-ui/react-select/dist";
 
@@ -159,77 +159,75 @@ const Form = () => {
             </div>
           </div>
         </CardContent>
-        <CardFooter className="flex justify-between">
-          <TooltipProvider>
-            <Toaster richColors />
-
-            <Dialog>
-              <DialogTrigger>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <Button variant="outline">Submit</Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Submit the form</TooltipContent>
-                </Tooltip>
-              </DialogTrigger>
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>Submit report</DialogTitle>
-                  <DialogDescription>
-                    Are you sure you want to submit the report?
-                  </DialogDescription>
-                </DialogHeader>
-                <div className=" flex flex-col gap-4 py-4">
-                  <div className=" items-center gap-4">
-                    <label
-                      htmlFor="Username"
-                      className="text-right flex flex-row gap-2"
-                    >
-                      Username: <div>{newForm.watch("username")}</div>
-                    </label>
-                  </div>
-                  <div className=" items-center gap-4">
-                    <label
-                      htmlFor="email"
-                      className="text-right flex flex-row gap-2"
-                    >
-                      Email: <div>{newForm.watch("email")}</div>
-                    </label>
-                  </div>
-                  <div className="items-center gap-4">
-                    <label
-                      htmlFor="number"
-                      className="text-right flex flex-row gap-2"
-                    >
-                      Contact:
-                      <div>{newForm.watch("contact")}</div>
-                    </label>
-                  </div>
-                  <div className=" items-center gap-4">
-                    <label
-                      htmlFor="apps"
-                      className="text-right flex flex-row gap-2 "
-                    >
-                      Favourite application:
-                      <div>{newForm.watch("application")}</div>
-                    </label>
-                  </div>
-                  <div className=" items-center gap-4">
-                    <label
-                      htmlFor="message"
-                      className="text-right flex flex-row gap-2"
-                    >
-                      Message: <div>{newForm.watch("message")}</div>
-                    </label>
-                  </div>
+        <CardFooter className="flex justify-end">
+          <Dialog>
+            <DialogTrigger>
+              <Tooltip>
+                <TooltipTrigger>
+                  <Button variant="outline">Submit</Button>
+                </TooltipTrigger>
+                <TooltipContent>Submit the form</TooltipContent>
+              </Tooltip>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Submit report</DialogTitle>
+                <DialogDescription>
+                  Are you sure you want to submit the report?
+                </DialogDescription>
+              </DialogHeader>
+              <div className=" flex flex-col gap-4 py-4">
+                <div className=" items-center gap-4">
+                  <label
+                    htmlFor="Username"
+                    className="text-right flex flex-row gap-2"
+                  >
+                    Username: <div>{newForm.watch("username")}</div>
+                  </label>
                 </div>
-                <DialogFooter className="flex gap-72">
+                <div className=" items-center gap-4">
+                  <label
+                    htmlFor="email"
+                    className="text-right flex flex-row gap-2"
+                  >
+                    Email: <div>{newForm.watch("email")}</div>
+                  </label>
+                </div>
+                <div className="items-center gap-4">
+                  <label
+                    htmlFor="number"
+                    className="text-right flex flex-row gap-2"
+                  >
+                    Contact:
+                    <div>{newForm.watch("contact")}</div>
+                  </label>
+                </div>
+                <div className=" items-center gap-4">
+                  <label
+                    htmlFor="apps"
+                    className="text-right flex flex-row gap-2 "
+                  >
+                    Favourite application:
+                    <div>{newForm.watch("application")}</div>
+                  </label>
+                </div>
+                <div className=" items-center gap-4">
+                  <label
+                    htmlFor="message"
+                    className="text-right flex flex-row gap-2"
+                  >
+                    Message: <div>{newForm.watch("message")}</div>
+                  </label>
+                </div>
+              </div>
+              <DialogFooter className="flex gap-72">
+                <DialogClose>
                   <Tooltip>
                     <TooltipTrigger>
                       <Button
                         className="bg-red-600 hover:bg-red-500"
                         onClick={() => {
-                          toast.error("Couldn't submit the form");
+                          toast.error("Form has been cancelled");
                         }}
                       >
                         Cancel
@@ -237,16 +235,16 @@ const Form = () => {
                     </TooltipTrigger>
                     <TooltipContent>Cancel the form</TooltipContent>
                   </Tooltip>
-
+                </DialogClose>
+                <DialogClose>
                   <Tooltip>
                     <TooltipTrigger>
                       <Button
-                        type="submit"
                         className="bg-green-700 hover:bg-green-600"
                         onClick={() => {
-                          toast.success("Successfully submitted the form");
-                          const values = newForm.getValues();
-                          console.log(values);
+                          const values = newForm.getValues(); // Get form values
+                          console.log(values); // Log values (replace with actual submission logic)
+                          toast.success("Form successfully submitted!");
                         }}
                       >
                         Submit
@@ -254,10 +252,10 @@ const Form = () => {
                     </TooltipTrigger>
                     <TooltipContent>Submit the form</TooltipContent>
                   </Tooltip>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </TooltipProvider>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </CardFooter>
       </Card>
     </div>
