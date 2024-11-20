@@ -36,7 +36,6 @@ import {
   DialogTrigger,
   DialogClose,
 } from "./components/ui/dialog";
-// import { Value } from "node_modules/@radix-ui/react-select/dist";
 
 const Form = () => {
   const newForm = useForm({
@@ -163,7 +162,7 @@ const Form = () => {
           <Dialog>
             <DialogTrigger>
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                   <Button variant="outline">Submit</Button>
                 </TooltipTrigger>
                 <TooltipContent>Submit the form</TooltipContent>
@@ -223,7 +222,7 @@ const Form = () => {
               <DialogFooter className="flex gap-72">
                 <DialogClose>
                   <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
                       <Button
                         className="bg-red-600 hover:bg-red-500"
                         onClick={() => {
@@ -238,7 +237,7 @@ const Form = () => {
                 </DialogClose>
                 <DialogClose>
                   <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
                       <Button
                         className="bg-green-700 hover:bg-green-600"
                         onClick={() => {
