@@ -56,12 +56,6 @@ const Display = () => {
                   Resolved
                 </Button>
               </div>
-              {/* <div className="mt-3 text-xs text-gray-500 flex justify-between ">
-              <div>
-                <strong>Submitted At:</strong> {report.submittedAt || "Unknown"}
-              </div>
-              <div>Fixed at:</div>
-            </div> */}
             </div>
             <div className="mt-3 text-xs text-gray-500 flex justify-between ">
               <div>
