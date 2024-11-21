@@ -36,7 +36,11 @@ import {
   DialogTrigger,
   DialogClose,
 } from "./components/ui/dialog";
-import { useMutation } from "@tanstack/react-query";
+import {
+  // QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
 import axios from "axios";
 
 const Form = () => {
@@ -49,6 +53,7 @@ const Form = () => {
       application: "",
     },
   });
+  const queryClient = useQueryClient();
   const submitDataMutation = useMutation({
     mutationFn: async () => {
       const values = newForm.getValues(); // Get form values
@@ -58,6 +63,16 @@ const Form = () => {
       );
       return response.data;
       console.log(response.data);
+    },
+    onSuccess: () => {
+      toast.success("Bug report submitted successfully");
+      queryClient.invalidateQueries({
+        queryKey: ["report"],
+      });
+      newForm.reset;
+    },
+    onError: () => {
+      toast.error("Failed to submit the bug report");
     },
   });
 
@@ -131,7 +146,7 @@ const Form = () => {
                         <Icon icon="line-md:facebook" />
                       </div>
                     </SelectItem>
-                    <SelectItem value="insta">
+                    <SelectItem value="instagram">
                       <div className="flex gap-1 items-center">
                         <span>Instagram</span>
                         <Icon icon="line-md:instagram" />
@@ -262,7 +277,7 @@ const Form = () => {
                         onClick={() => {
                           const values = newForm.getValues(); // Get form values
                           console.log(values); // Log values (replace with actual submission logic)
-                          toast.success("Form successfully submitted!");
+                          // toast.success("Form successfully submitted!");
                           submitDataMutation.mutate();
                         }}
                       >
