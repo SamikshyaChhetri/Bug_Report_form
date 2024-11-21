@@ -36,6 +36,8 @@ import {
   DialogTrigger,
   DialogClose,
 } from "./components/ui/dialog";
+import { useMutation } from "@tanstack/react-query";
+import axios from "axios";
 
 const Form = () => {
   const newForm = useForm({
@@ -47,6 +49,18 @@ const Form = () => {
       application: "",
     },
   });
+  const submitDataMutation = useMutation({
+    mutationFn: async () => {
+      const values = newForm.getValues(); // Get form values
+      const response = await axios.post(
+        "https://lms.sachetsubedi001.com.np/api/bug-reports",
+        values
+      );
+      return response.data;
+      console.log(response.data);
+    },
+  });
+
   return (
     <div className="flex flex-col items-center justify-center h-screen  ">
       <Card className=" w-[50%] bg-blue-50 border border-blue-300 ">
@@ -123,7 +137,7 @@ const Form = () => {
                         <Icon icon="line-md:instagram" />
                       </div>
                     </SelectItem>
-                    <SelectItem value="yt">
+                    <SelectItem value="youtube">
                       <div className="flex gap-1 items-center">
                         <span>Youtube</span> <Icon icon="line-md:youtube" />
                       </div>
@@ -249,6 +263,7 @@ const Form = () => {
                           const values = newForm.getValues(); // Get form values
                           console.log(values); // Log values (replace with actual submission logic)
                           toast.success("Form successfully submitted!");
+                          submitDataMutation.mutate();
                         }}
                       >
                         Submit
