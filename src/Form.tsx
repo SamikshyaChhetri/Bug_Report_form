@@ -48,8 +48,8 @@ const Form = () => {
     },
   });
   return (
-    <div className="flex flex-col items-center justify-center h-screen ">
-      <Card className=" w-[50%] bg-blue-50 ">
+    <div className="flex flex-col items-center justify-center h-screen  ">
+      <Card className=" w-[50%] bg-blue-50 border border-blue-300 ">
         <CardHeader>
           <CardTitle className="text-center">Bug Report Form</CardTitle>
           <CardDescription className="text-center">

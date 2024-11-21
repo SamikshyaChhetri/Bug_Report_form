@@ -28,7 +28,7 @@ const Display = () => {
     <div className="flex gap-2 flex-col justify-center items-center">
       {queryResult.data.data.map((report: any) => {
         return (
-          <div className=" p-4 border border-blue-700 w-full md:w-[50%] rounded-md bg-blue-50 shadow-sm ">
+          <div className=" p-4 border border-blue-300 w-full md:w-[50%] rounded-md bg-blue-50 shadow-sm ">
             <div className="flex justify-between">
               <div className="flex flex-col gap-3">
                 <div className="text-lg font-medium ">
@@ -60,11 +60,15 @@ const Display = () => {
             <div className="mt-3 text-xs text-gray-500 flex justify-between ">
               <div>
                 <strong>Submitted At: </strong>
-                {moment(report.createdAt).format("D MMM, YYYY")}
+                {report.createdAt
+                  ? moment(report.createdAt).format("DD MMM, YYYY")
+                  : "Unknown"}
               </div>
               <div>
-                <strong>Resolved at:</strong>
-                {moment(report.resolved).format("D MMM, YYYY")}
+                <strong>Resolved at: </strong>
+                {report.resolvedAt
+                  ? moment(report.resolvedAt).format("DD MMM, YYYY")
+                  : "Not Resolved"}
               </div>
             </div>
           </div>
