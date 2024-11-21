@@ -49,7 +49,7 @@ const Form = () => {
   });
   return (
     <div className="flex flex-col items-center justify-center h-screen">
-      <Card className=" w-[50%]">
+      <Card className=" w-[50%] bg-blue-50 border-black">
         <CardHeader>
           <CardTitle className="text-center">Bug Report Form</CardTitle>
           <CardDescription className="text-center">
@@ -163,7 +163,12 @@ const Form = () => {
             <DialogTrigger>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="outline">Submit</Button>
+                  <Button
+                    variant="outline"
+                    className="bg-green-700 hover:bg-green-600 hover:text-white text-white"
+                  >
+                    Submit
+                  </Button>
                 </TooltipTrigger>
                 <TooltipContent>Submit the form</TooltipContent>
               </Tooltip>
