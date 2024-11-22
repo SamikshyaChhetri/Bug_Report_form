@@ -71,10 +71,12 @@ const Form = () => {
       queryClient.invalidateQueries({
         queryKey: ["report"],
       });
+      setDialogOpen(false);
       newForm.reset();
     },
     onError: () => {
       toast.error("Failed to submit the bug report");
+      setDialogOpen(false);
     },
   });
 
