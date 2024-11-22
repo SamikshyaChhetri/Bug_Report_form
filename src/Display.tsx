@@ -1,8 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { QueryClient, useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { Skeleton } from "./components/ui/skeleton";
 import { Button } from "./components/ui/button";
 import moment from "moment";
+
+const deleteReportMutation = useMutation({
+  mutationFn: async () => {
+    await axios.put(
+      "https://lms.sachetsubedi001.com.np/api/bug-reports/:report_id"
+    );
+  },
+});
 
 const Display = () => {
   // To get data -> query
@@ -49,7 +57,12 @@ const Display = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <Button className="bg-red-600 hover:bg-red-700 px-8">
+                <Button
+                  className="bg-red-600 hover:bg-red-700 px-8"
+                  onClick={() => {
+                    deleteReportMutation.mutate(report.id);
+                  }}
+                >
                   Delete
                 </Button>
                 <Button className="bg-blue-600 hover:bg-blue-700 px-8">
