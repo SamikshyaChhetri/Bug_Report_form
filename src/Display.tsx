@@ -1,11 +1,12 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { Skeleton } from "./components/ui/skeleton";
-import { Button } from "./components/ui/button";
 import moment from "moment";
 import { toast } from "sonner";
+import { Button } from "./components/ui/button";
+import { Skeleton } from "./components/ui/skeleton";
 
 const Display = () => {
+  const queryClient = useQueryClient();
   const deleteReportMutation = useMutation({
     mutationFn: async (report_id) => {
       await axios.put(
@@ -14,7 +15,10 @@ const Display = () => {
     },
     onSuccess: () => {
       toast.success("Report deleted successfully!");
-      queryResult.refetch();
+      queryClient.invalidateQueries({
+        queryKey: ["report"],
+      });
+      // queryResult.refetch();
     },
     onError: (error: any) => {
       console.error("Error deleting report:", error);

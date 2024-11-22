@@ -1,3 +1,12 @@
+import { Icon } from "@iconify/react/dist/iconify.js";
+import {
+  // QueryClient,
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query";
+import axios from "axios";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Button } from "./components/ui/button";
 import {
@@ -8,6 +17,16 @@ import {
   CardHeader,
   CardTitle,
 } from "./components/ui/card";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./components/ui/dialog";
 import { Input } from "./components/ui/input";
 import {
   Select,
@@ -19,31 +38,14 @@ import {
   SelectValue,
 } from "./components/ui/select";
 import { Textarea } from "./components/ui/textarea";
-import { useForm } from "react-hook-form";
-import { Icon } from "@iconify/react/dist/iconify.js";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "./components/ui/tooltip";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogClose,
-} from "./components/ui/dialog";
-import {
-  // QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
-import axios from "axios";
 
 const Form = () => {
+  const [dialogOpen, setDialogOpen] = useState(false);
   const newForm = useForm({
     defaultValues: {
       username: "",
@@ -188,13 +190,16 @@ const Form = () => {
           </div>
         </CardContent>
         <CardFooter className="flex justify-end">
-          <Dialog>
+          <Dialog open={dialogOpen}>
             <DialogTrigger>
               <Tooltip>
                 <TooltipTrigger asChild>
                   <Button
                     variant="outline"
                     className="bg-green-700 hover:bg-green-600 hover:text-white text-white"
+                    onClick={() => {
+                      setDialogOpen(true);
+                    }}
                   >
                     Submit
                   </Button>
@@ -261,6 +266,7 @@ const Form = () => {
                         className="bg-red-600 hover:bg-red-500"
                         onClick={() => {
                           toast.error("Form has been cancelled");
+                          setDialogOpen(false);
                         }}
                       >
                         Cancel
@@ -276,12 +282,13 @@ const Form = () => {
                         className="bg-green-700 hover:bg-green-600"
                         onClick={() => {
                           const values = newForm.getValues(); // Get form values
-                          console.log(values); // Log values (replace with actual submission logic)
-                          // toast.success("Form successfully submitted!");
+                          console.log(values);
                           submitDataMutation.mutate();
                         }}
                       >
-                        Submit
+                        {submitDataMutation.isPending
+                          ? "Submitting.."
+                          : "Submit"}
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>Submit the form</TooltipContent>
