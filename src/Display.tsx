@@ -15,6 +15,10 @@ const deleteReportMutation = useMutation({
     toast.success("Report deleted successfully!");
     QueryClient.invalidateQueries(["report"]);
   },
+  onError: (error: any) => {
+    console.error("Error deleting report:", error);
+    toast.error("Failed to delete report. Please try again.");
+  },
 });
 
 const Display = () => {
