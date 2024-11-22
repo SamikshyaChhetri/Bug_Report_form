@@ -3,12 +3,17 @@ import axios from "axios";
 import { Skeleton } from "./components/ui/skeleton";
 import { Button } from "./components/ui/button";
 import moment from "moment";
+import { toast } from "sonner";
 
 const deleteReportMutation = useMutation({
   mutationFn: async () => {
     await axios.put(
       "https://lms.sachetsubedi001.com.np/api/bug-reports/:report_id"
     );
+  },
+  onSuccess: () => {
+    toast.success("Report deleted successfully!");
+    QueryClient.invalidateQueries(["report"]);
   },
 });
 
