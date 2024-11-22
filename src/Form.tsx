@@ -69,7 +69,7 @@ const Form = () => {
       queryClient.invalidateQueries({
         queryKey: ["report"],
       });
-      newForm.reset;
+      newForm.reset();
     },
     onError: () => {
       toast.error("Failed to submit the bug report");

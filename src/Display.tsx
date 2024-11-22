@@ -5,23 +5,26 @@ import { Button } from "./components/ui/button";
 import moment from "moment";
 import { toast } from "sonner";
 
-const deleteReportMutation = useMutation({
-  mutationFn: async () => {
-    await axios.put(
-      "https://lms.sachetsubedi001.com.np/api/bug-reports/:report_id"
-    );
-  },
-  onSuccess: () => {
-    toast.success("Report deleted successfully!");
-    QueryClient.invalidateQueries(["report"]);
-  },
-  onError: (error: any) => {
-    console.error("Error deleting report:", error);
-    toast.error("Failed to delete report. Please try again.");
-  },
-});
-
 const Display = () => {
+  // const queryClient = new QueryClient();
+  const deleteReportMutation = useMutation({
+    mutationFn: async (report_id) => {
+      await axios.put(
+        "https://lms.sachetsubedi001.com.np/api/bug-reports/" + report_id
+      );
+    },
+    onSuccess: () => {
+      toast.success("Report deleted successfully!");
+      // queryClient.invalidateQueries({
+      //   queryKey: ["report"],
+      // });
+      queryResult.refetch();
+    },
+    onError: (error: any) => {
+      console.error("Error deleting report:", error);
+      toast.error("Failed to delete report. Please try again.");
+    },
+  });
   // To get data -> query
   // To post data -> mutation
   const queryResult = useQuery({
@@ -45,7 +48,10 @@ const Display = () => {
     <div className="flex gap-2 flex-col justify-center items-center">
       {queryResult.data.data.map((report: any) => {
         return (
-          <div className=" p-4 border border-blue-300 w-full md:w-[50%] rounded-md bg-blue-50 shadow-sm ">
+          <div
+            key={report.id}
+            className=" p-4 border border-blue-300 w-full md:w-[50%] rounded-md bg-blue-50 shadow-sm "
+          >
             <div className="flex justify-between">
               <div className="flex flex-col gap-3">
                 <div className="text-lg font-medium ">
