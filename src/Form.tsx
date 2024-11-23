@@ -1,9 +1,5 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
-import {
-  // QueryClient,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
