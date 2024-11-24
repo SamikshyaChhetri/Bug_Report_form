@@ -3,6 +3,15 @@ import axios from "axios";
 import moment from "moment";
 import { toast } from "sonner";
 import { Button } from "./components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "./components/ui/dialog";
 import { Skeleton } from "./components/ui/skeleton";
 
 const Display = () => {
@@ -71,14 +80,29 @@ const Display = () => {
                 </div>
               </div>
               <div className="flex flex-col gap-2">
-                <Button
-                  className="bg-red-600 hover:bg-red-700 px-8"
-                  onClick={() => {
-                    deleteReportMutation.mutate(report.id);
-                  }}
-                >
-                  Delete
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      variant="outline"
+                      className="bg-red-700 hover:bg-red-600 text-white hover:text-white"
+                    >
+                      Delete
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Delete Report</DialogTitle>
+                      <DialogDescription>
+                        Are you sure you want to delete this report?
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4"></div>
+                    <DialogFooter>
+                      <Button type="submit">Delete</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+
                 <Button className="bg-blue-600 hover:bg-blue-700 px-8">
                   Resolved
                 </Button>
