@@ -18,7 +18,6 @@ const Display = () => {
       queryClient.invalidateQueries({
         queryKey: ["report"],
       });
-      // queryResult.refetch();
     },
     onError: (error: any) => {
       console.error("Error deleting report:", error);
