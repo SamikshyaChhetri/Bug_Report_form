@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Button } from "./components/ui/button";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -98,7 +99,16 @@ const Display = () => {
                     </DialogHeader>
                     <div className="grid gap-4 py-4"></div>
                     <DialogFooter>
-                      <Button type="submit">Delete</Button>
+                      <DialogClose>
+                        <Button
+                          type="submit"
+                          onClick={() => {
+                            deleteReportMutation.mutate(report.id);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </DialogClose>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
