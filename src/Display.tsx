@@ -1,3 +1,4 @@
+import { Icon } from "@iconify/react/dist/iconify.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import moment from "moment";
@@ -83,12 +84,7 @@ const Display = () => {
               <div className="flex flex-col gap-2">
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button
-                      variant="outline"
-                      className="bg-red-700 hover:bg-red-600 text-white hover:text-white"
-                    >
-                      Delete
-                    </Button>
+                    <Button variant={"destructive"}>Delete</Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
@@ -99,16 +95,23 @@ const Display = () => {
                     </DialogHeader>
                     <div className="grid gap-4 py-4"></div>
                     <DialogFooter>
-                      <DialogClose>
-                        <Button
-                          type="submit"
-                          onClick={() => {
-                            deleteReportMutation.mutate(report.id);
-                          }}
-                        >
-                          Delete
-                        </Button>
+                      <DialogClose className="flex gap-3">
+                        <Button>Cancel</Button>
                       </DialogClose>
+                      <Button
+                        type="submit"
+                        variant={"destructive"}
+                        disabled={deleteReportMutation.isPending}
+                        onClick={() => {
+                          deleteReportMutation.mutate(report.id);
+                        }}
+                      >
+                        {deleteReportMutation.isPending ? (
+                          <Icon icon="svg-spinners:6-dots-scale" />
+                        ) : (
+                          "Delete"
+                        )}
+                      </Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>

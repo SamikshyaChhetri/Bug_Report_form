@@ -265,6 +265,7 @@ const Form = () => {
                         onClick={() => {
                           toast.error("Form has been cancelled");
                           setDialogOpen(false);
+                          newForm.reset();
                         }}
                       >
                         Cancel
@@ -278,15 +279,18 @@ const Form = () => {
                     <TooltipTrigger asChild>
                       <Button
                         className="bg-green-700 hover:bg-green-600"
+                        disabled={submitDataMutation.isPending}
                         onClick={() => {
                           const values = newForm.getValues(); // Get form values
                           console.log(values);
                           submitDataMutation.mutate();
                         }}
                       >
-                        {submitDataMutation.isPending
-                          ? "Submitting.."
-                          : "Submit"}
+                        {submitDataMutation.isPending ? (
+                          <Icon icon="svg-spinners:6-dots-scale" />
+                        ) : (
+                          "Submit"
+                        )}
                       </Button>
                     </TooltipTrigger>
                     <TooltipContent>Submit the form</TooltipContent>
