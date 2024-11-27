@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react/dist/iconify.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios, { AxiosError } from "axios";
 import moment from "moment";
+import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "./components/ui/button";
 import {
@@ -17,6 +18,8 @@ import {
 import { Skeleton } from "./components/ui/skeleton";
 
 const Display = () => {
+  const [resolvedDialogOpen, setDialogOpen] = useState(false);
+
   const queryClient = useQueryClient();
   const deleteReportMutation = useMutation({
     mutationFn: async (report_id) => {
@@ -139,6 +142,9 @@ const Display = () => {
                     <Button
                       className="bg-blue-600 hover:bg-blue-700 px-8"
                       disabled={report.resolved}
+                      onClick={() => {
+                        setDialogOpen(true);
+                      }}
                     >
                       Resolved
                     </Button>
@@ -146,23 +152,36 @@ const Display = () => {
                   <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
                       <DialogTitle>Mark report as Resolved</DialogTitle>
-                      <DialogDescription>
-                        Are you sure you want to mark the report as resolved
-                      </DialogDescription>
                     </DialogHeader>
+                    <DialogDescription>
+                      Are you sure you want to mark the report as resolved
+                    </DialogDescription>
                     <DialogFooter>
                       <DialogClose className="flex gap-3">
-                        <Button variant={"destructive"}>Cancel</Button>
                         <Button
-                          type="submit"
-                          className="bg-blue-600 hover:bg-blue-700"
+                          variant={"destructive"}
                           onClick={() => {
-                            resolveReport.mutate(report.id);
+                            setDialogOpen(false);
                           }}
                         >
-                          Resolved
+                          Cancel
                         </Button>
                       </DialogClose>
+                      <Button
+                        type="submit"
+                        disabled={resolveReport.isPending}
+                        className="bg-blue-600 hover:bg-blue-700"
+                        onClick={() => {
+                          resolveReport.mutate(report.id);
+                          setDialogOpen(false);
+                        }}
+                      >
+                        {resolveReport.isPending ? (
+                          <Icon icon="svg-spinners:6-dots-scale" />
+                        ) : (
+                          "Resolved"
+                        )}
+                      </Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
