@@ -150,16 +150,19 @@ const Display = () => {
                         Are you sure you want to mark the report as resolved
                       </DialogDescription>
                     </DialogHeader>
-                    <div className="grid gap-4 py-4"></div>
                     <DialogFooter>
-                      <Button
-                        type="submit"
-                        onClick={() => {
-                          resolveReport.mutate(report.id);
-                        }}
-                      >
-                        Resolved
-                      </Button>
+                      <DialogClose className="flex gap-3">
+                        <Button variant={"destructive"}>Cancel</Button>
+                        <Button
+                          type="submit"
+                          className="bg-blue-600 hover:bg-blue-700"
+                          onClick={() => {
+                            resolveReport.mutate(report.id);
+                          }}
+                        >
+                          Resolved
+                        </Button>
+                      </DialogClose>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
