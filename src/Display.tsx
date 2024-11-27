@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import moment from "moment";
 import { toast } from "sonner";
 import { Button } from "./components/ui/button";
@@ -33,6 +33,24 @@ const Display = () => {
     onError: (error: any) => {
       console.error("Error deleting report:", error);
       toast.error("Failed to delete report. Please try again.");
+    },
+  });
+
+  const resolveReport = useMutation({
+    mutationFn: async (reportId) => {
+      await axios.post(
+        "https://lms.sachetsubedi001.com.np/api/bug-reports/resolve/" + reportId
+      );
+    },
+    onSuccess: () => {
+      toast.success("Successfully resolved the report");
+      queryClient.invalidateQueries({
+        queryKey: ["report"],
+      });
+    },
+    onError: (error: AxiosError<{ message: string }>) => {
+      console.log(error);
+      toast.error(error.response?.data.message || "");
     },
   });
   // To get data -> query
@@ -116,9 +134,35 @@ const Display = () => {
                   </DialogContent>
                 </Dialog>
 
-                <Button className="bg-blue-600 hover:bg-blue-700 px-8">
-                  Resolved
-                </Button>
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button
+                      className="bg-blue-600 hover:bg-blue-700 px-8"
+                      disabled={report.resolved}
+                    >
+                      Resolved
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-[425px]">
+                    <DialogHeader>
+                      <DialogTitle>Mark report as Resolved</DialogTitle>
+                      <DialogDescription>
+                        Are you sure you want to mark the report as resolved
+                      </DialogDescription>
+                    </DialogHeader>
+                    <div className="grid gap-4 py-4"></div>
+                    <DialogFooter>
+                      <Button
+                        type="submit"
+                        onClick={() => {
+                          resolveReport.mutate(report.id);
+                        }}
+                      >
+                        Resolved
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </div>
             </div>
             <div className="mt-3 text-xs text-gray-500 flex justify-between ">
