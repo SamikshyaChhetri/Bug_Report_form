@@ -21,5 +21,5 @@ This is a simple bug report form that allows you to create a bug report and orga
 
 ### Author
 
-**Name**: Samikshya Chhetri
+**Name**: Samikshya Chhetri<br/>
 **Email**: samikshyabchhetri@gmail.com
