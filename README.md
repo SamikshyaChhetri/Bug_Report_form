@@ -1,5 +1,7 @@
 This is a simple bug report form that allows you to create a bug report and organize them.
 
+[Demo](https://reportbugs.samikshyachhetri.com.np/)
+
 ### Features
 
 1. Report any issues/Bugs easily.
