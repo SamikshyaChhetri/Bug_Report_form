@@ -79,7 +79,7 @@ const Form = () => {
     },
   });
   const onSubmit = () => {
-    submitDataMutation.mutate();
+    setDialogOpen(true);
   };
   return (
     <div className="flex flex-col items-center justify-center h-screen  ">
@@ -303,6 +303,8 @@ const Form = () => {
                           disabled={submitDataMutation.isPending}
                           onClick={() => {
                             const values = newForm.getValues(); // Get form values
+                            submitDataMutation.mutate();
+
                             console.log(values);
                           }}
                         >
